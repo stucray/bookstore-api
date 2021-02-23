@@ -12,6 +12,7 @@ import reactor.core.publisher.Mono;
 public class BookService {
 
     private final BookRepository repository;
+
     public Flux<Book> getAllBooks() {
         return repository.findAll();
     }

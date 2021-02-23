@@ -4,7 +4,6 @@ import lombok.Data;
 
 @Data
 public class BookSummary {
-
     String id;
     String title;
     String description;

@@ -1,8 +1,14 @@
-logging:
-  level:
-    org.springframework.data:
-      mongodb:
-        core:
-          ReactiveMongoTemplate: TRACE
-          MongoTemplate: TRACE
+#logging:
+#  level:
+#    org.springframework.data:
+#      mongodb:
+#        core:
+#          ReactiveMongoTemplate: TRACE
+#          MongoTemplate: TRACE
 
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://euler:8080/auth/realms/bookstore
