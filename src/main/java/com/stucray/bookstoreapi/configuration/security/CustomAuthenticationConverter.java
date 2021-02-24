@@ -1,4 +1,4 @@
-package com.stucray.bookstoreapi.configuration;
+package com.stucray.bookstoreapi.configuration.security;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
@@ -11,6 +11,11 @@ import reactor.core.publisher.Mono;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+/**
+ * Custom converter to extract granted authorities from roles property in JWT.
+ *
+ * This works with Keycloak using custom mapper for roles.
+ */
 @Component
 public class CustomAuthenticationConverter implements Converter<Jwt, Mono<AbstractAuthenticationToken>> {
     @Override
