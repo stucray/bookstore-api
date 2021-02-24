@@ -7,7 +7,7 @@ pipeline {
     stage("Build") {
         steps {
           echo 'Building and installing Maven artifact.'
-          sh './mvnw clean install'
+          sh './mvn clean install'
       }
     }
   }
