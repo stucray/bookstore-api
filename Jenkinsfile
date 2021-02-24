@@ -9,6 +9,8 @@ pipeline {
   }
 
   post {
-    cleanWs()
+    always {
+      cleanWs()
+    }
   }
 }
