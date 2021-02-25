@@ -38,13 +38,20 @@ pipeline {
     }
     
     //Build Docker image
-    stage("Docker Image") {
+    stage("Build Docker Image") {
     
         steps {
             echo 'Building Docker image'
             sh 'mvn spring-boot:build-image -DskipTests=true'
         }
     }
+
+    // stage("Deploy Docker Image") {
+    //     steps {
+    //         echo 'Deploying to DockerHub'
+    //         sh 'docker push '
+    //     }
+    // }
   }
 
   post {
