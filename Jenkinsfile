@@ -1,7 +1,7 @@
 pipeline {
-  environment {
-      JAVA_TOOL_OPTIONS = "-Duser.home=/var/maven"
-  }
+//   environment {
+//       JAVA_TOOL_OPTIONS = "-Duser.home=/var/maven"
+//   }
   //Docker agent with a volume for the .m2 directory so that artifacts are 
   //cached.
 //   agent {
@@ -11,7 +11,7 @@ pipeline {
 //       }
 //   }
   agent any
-  
+
   //Package the application without running tests.
   stages {
     stage("Build") {
