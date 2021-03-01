@@ -9,10 +9,12 @@ pipeline {
                 returnStdout: true
         )
 
-        MVN_ARTIFACT_ID = readMavenPom().getArtifactId()
+        MVN_GROUP = readMavenPom.getGroupId()
+        MVN_ARTIFACT = readMavenPom().getArtifactId()
         MVN_VERSION = readMavenPom().getVersion()
 
-        DOCKER_TAG = "${DOCKER_REGISTRY}/stucray/${MVN_ARTIFACT_ID}-${MVN_VERSION}-${GIT_BRANCH}-${GIT_COMMIT_SHORT}"
+        DOCKER_IMAGE = "${DOCKER_REGISTRY}/${MVN_ARTIFACT}:${MVN_VERSION}"
+        DOCKER_TAG = "${DOCKER_REGISTRY}/${DOCKER_IMAGE}-${GIT_BRANCH}-${GIT_COMMIT_SHORT}"
    }
 
   //Package the application without running tests.
@@ -20,7 +22,7 @@ pipeline {
     stage("Build") {
             steps {
           echo 'Building and packaging Maven artifact.'
-          echo "artifact = ${MVN_ARTIFACT_ID} version = ${MVN_VERSION}"
+          echo "artifact = ${MVN_ARTIFACT} version = ${MVN_VERSION}"
           echo "Git commit = ${GIT_COMMIT_SHORT}"
           sh 'mvn clean package -DskipTests=true'
       }
@@ -57,7 +59,9 @@ pipeline {
     stage("Deploy Docker Image") {
       steps {
         echo 'Deploying docker image to internal registry'
-        echo "Tagging image: ${DOCKER_TAG}"
+        echo "Tagging image: ${DOCKER_IMAGE} as ${DOCKER_TAG}"
+        sh "docker image tag ${IMAGE_TAG} ${DOCKER_TAG}"
+        sh "docker push ${DOCKER_TAG}"
 
       }
     }
