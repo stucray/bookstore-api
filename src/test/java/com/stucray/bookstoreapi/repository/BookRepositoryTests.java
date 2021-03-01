@@ -22,7 +22,7 @@ public class BookRepositoryTests {
     private BookRepository bookRepository;
 
     @Test
-    @DisplayName("When books are added the all should be retrieved from getAll method")
+    @DisplayName("When a book is added it should be retrieved from getAll method")
     public void testGetAllBooks() {
         Book book = new Book();
         book.setTitle("A Title");

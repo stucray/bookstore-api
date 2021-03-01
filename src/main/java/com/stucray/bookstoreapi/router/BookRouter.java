@@ -10,6 +10,9 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.*;
 
+/**
+ * Defines routes for books endpoints.
+ */
 @Configuration
 public class BookRouter {
 

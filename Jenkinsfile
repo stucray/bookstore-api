@@ -1,22 +1,23 @@
 pipeline {
-//   environment {
-//       JAVA_TOOL_OPTIONS = "-Duser.home=/var/maven"
-//   }
-  //Docker agent with a volume for the .m2 directory so that artifacts are 
-  //cached.
-//   agent {
-//       docker {
-//           image "maven:3.6.3-openjdk-15"
-//           args "-v /tmp/maven:/var/maven/.m2 -e MAVEN_CONFIG=/var/maven/.m2"
-//       }
-//   }
   agent any
+
+  environment {
+        GIT_COMMIT_SHORT = sh(
+                script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
+                returnStdout: true
+        )
+
+        MVN_ARTIFACT_ID = readMavenPom().getArtifactId()
+        MVN_VERSION = readMavenPom().getVersion()
+    }
 
   //Package the application without running tests.
   stages {
     stage("Build") {
             steps {
           echo 'Building and packaging Maven artifact.'
+          echo "artifact = ${MVN_ARTIFACT_ID} version = ${MVN_VERSION}"
+          echo "Git commit = ${GIT_COMMIT_SHORT}"
           sh 'mvn clean package -DskipTests=true'
       }
     }
@@ -28,6 +29,8 @@ pipeline {
             sh 'mvn test'
         }
     }
+
+
 
     //Deploy artifact to maven repository
     stage("Deploy Maven Artifact") {
@@ -46,12 +49,11 @@ pipeline {
         }
     }
 
-    // stage("Deploy Docker Image") {
-    //     steps {
-    //         echo 'Deploying to DockerHub'
-    //         sh 'docker push '
-    //     }
-    // }
+    //Deploy image to internal docker registry.
+    steps {
+      echo 'Deploying docker image to internal registry'
+
+    }
   }
 
   post {
