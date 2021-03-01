@@ -50,7 +50,7 @@ pipeline {
     }
 
     //Deploy image to internal docker registry.
-    stage("Deploy Docker Image")
+    stage("Deploy Docker Image") {
       steps {
         echo 'Deploying docker image to internal registry'
 
