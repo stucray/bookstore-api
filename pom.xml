@@ -9,7 +9,7 @@
 	</parent>
 	<groupId>com.stucray</groupId>
 	<artifactId>bookstore-api</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>bookstore-api</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
@@ -20,7 +20,7 @@
 		<connection>scm:git:ssh://git@github.com/stucray/bookstore-api.git</connection>
 		<developerConnection>scm:git:ssh://git@github.com/stucray/bookstore-api.git</developerConnection>
 		<url>scm:git:ssh://git@github.com/stucray/bookstore-api.git</url>
-	  <tag>bookstore-api-0.0.1</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<dependencies>
