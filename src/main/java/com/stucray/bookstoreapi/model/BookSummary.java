@@ -2,9 +2,10 @@ package com.stucray.bookstoreapi.model;
 
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@Builder
+@NoArgsConstructor
 public class BookSummary {
     String id;
     String title;

@@ -1,4 +1,5 @@
 pipeline {
+
   agent any
 
   environment {
@@ -21,17 +22,13 @@ pipeline {
   stages {
     stage("Build") {
             steps {
-          echo 'Building and packaging Maven artifact.'
-          echo "artifact = ${MVN_ARTIFACT} version = ${MVN_VERSION}"
-          echo "Git commit = ${GIT_COMMIT_SHORT}"
-          sh 'mvn clean package -DskipTests=true'
+           sh 'mvn clean package -DskipTests=true'
       }
     }
 
     //Run unit tests.
     stage("Unit Tests") {
         steps {
-            echo 'Running tests'
             sh 'mvn test'
         }
     }
@@ -39,30 +36,26 @@ pipeline {
 
 
     //Deploy artifact to maven repository
-    stage("Deploy Maven Artifact") {
+    stage("Deploy Artifact") {
         steps {
-            echo 'Deploying to Maven repository'
             sh 'mvn deploy -DskipTests=true'
         }
     }
     
     //Build Docker image
-    stage("Build Docker Image") {
+    stage("Build Image") {
     
         steps {
-            echo 'Building Docker image'
             sh 'mvn spring-boot:build-image -DskipTests=true'
         }
     }
 
     //Deploy image to internal docker registry.
-    stage("Deploy Docker Image") {
+    stage("Deploy Image") {
       steps {
-        echo 'Deploying docker image to internal registry'
-        echo "Tagging image: ${DOCKER_IMAGE} as ${DOCKER_TAG}"
+        echo "Tagging and pushing image: ${DOCKER_IMAGE} as ${DOCKER_TAG}"
         sh "docker image tag ${DOCKER_IMAGE} ${DOCKER_TAG}"
         sh "docker push ${DOCKER_TAG}"
-
       }
     }
   }
