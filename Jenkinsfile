@@ -2,6 +2,8 @@ pipeline {
   agent any
 
   environment {
+
+  	    DOCKER_REGISTRY = 'euler:5000'
         GIT_COMMIT_SHORT = sh(
                 script: "printf \$(git rev-parse --short ${GIT_COMMIT})",
                 returnStdout: true
@@ -9,6 +11,8 @@ pipeline {
 
         MVN_ARTIFACT_ID = readMavenPom().getArtifactId()
         MVN_VERSION = readMavenPom().getVersion()
+
+        DOCKER_TAG = "${DOCKER_REGISTRY}/stucray/${MVN_ARTIFACT_ID}-${MVN_VERSION}-${GIT_COMMIT_SHORT}"
    }
 
   //Package the application without running tests.
@@ -53,6 +57,7 @@ pipeline {
     stage("Deploy Docker Image") {
       steps {
         echo 'Deploying docker image to internal registry'
+        echo "Tagging image: ${DOCKER_TAG}"
 
       }
     }
