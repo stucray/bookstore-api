@@ -80,7 +80,7 @@
 						</exclude>
 					</excludes>
 					<image>
-						<name>stucray/${project.artifactId}:${project.version}</name>
+						<name>${project.artifactId}:${project.version}</name>
 					</image>
 				</configuration>
 			</plugin>
