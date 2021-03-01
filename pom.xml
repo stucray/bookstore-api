@@ -11,7 +11,7 @@
 	<artifactId>bookstore-api</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<name>bookstore-api</name>
-	<description>Demo project for Spring Boot</description>
+	<description>Bookstore API Service</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -21,7 +21,7 @@
 		<developerConnection>scm:git:ssh://git@github.com/stucray/bookstore-api.git</developerConnection>
 		<url>scm:git:ssh://git@github.com/stucray/bookstore-api.git</url>
 	  <tag>HEAD</tag>
-  </scm>
+    </scm>
 
 	<dependencies>
 		<dependency>
