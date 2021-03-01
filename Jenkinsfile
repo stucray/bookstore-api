@@ -9,7 +9,7 @@ pipeline {
                 returnStdout: true
         )
 
-        MVN_GROUP = readMavenPom.getGroupId()
+        MVN_GROUP = readMavenPom().getGroupId()
         MVN_ARTIFACT = readMavenPom().getArtifactId()
         MVN_VERSION = readMavenPom().getVersion()
 
