@@ -13,7 +13,7 @@ pipeline {
         MVN_ARTIFACT = readMavenPom().getArtifactId()
         MVN_VERSION = readMavenPom().getVersion()
 
-        DOCKER_IMAGE = "${DOCKER_REGISTRY}/${MVN_ARTIFACT}:${MVN_VERSION}"
+        DOCKER_IMAGE = "${MVN_ARTIFACT}:${MVN_VERSION}"
         DOCKER_TAG = "${DOCKER_REGISTRY}/${DOCKER_IMAGE}-${GIT_BRANCH}-${GIT_COMMIT_SHORT}"
    }
 
@@ -60,7 +60,7 @@ pipeline {
       steps {
         echo 'Deploying docker image to internal registry'
         echo "Tagging image: ${DOCKER_IMAGE} as ${DOCKER_TAG}"
-        sh "docker image tag ${IMAGE_TAG} ${DOCKER_TAG}"
+        sh "docker image tag ${IMAGE_IMAGE} ${DOCKER_TAG}"
         sh "docker push ${DOCKER_TAG}"
 
       }
