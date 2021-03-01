@@ -9,7 +9,7 @@ pipeline {
 
         MVN_ARTIFACT_ID = readMavenPom().getArtifactId()
         MVN_VERSION = readMavenPom().getVersion()
-    }
+   }
 
   //Package the application without running tests.
   stages {
@@ -50,9 +50,11 @@ pipeline {
     }
 
     //Deploy image to internal docker registry.
-    steps {
-      echo 'Deploying docker image to internal registry'
+    stage("Deploy Docker Image")
+      steps {
+        echo 'Deploying docker image to internal registry'
 
+      }
     }
   }
 
