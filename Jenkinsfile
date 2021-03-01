@@ -60,7 +60,7 @@ pipeline {
       steps {
         echo 'Deploying docker image to internal registry'
         echo "Tagging image: ${DOCKER_IMAGE} as ${DOCKER_TAG}"
-        sh "docker image tag ${IMAGE_IMAGE} ${DOCKER_TAG}"
+        sh "docker image tag ${DOCKER_IMAGE} ${DOCKER_TAG}"
         sh "docker push ${DOCKER_TAG}"
 
       }
