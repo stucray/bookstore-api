@@ -12,7 +12,7 @@ pipeline {
         MVN_ARTIFACT_ID = readMavenPom().getArtifactId()
         MVN_VERSION = readMavenPom().getVersion()
 
-        DOCKER_TAG = "${DOCKER_REGISTRY}/stucray/${MVN_ARTIFACT_ID}-${MVN_VERSION}-${GIT_COMMIT_SHORT}"
+        DOCKER_TAG = "${DOCKER_REGISTRY}/stucray/${MVN_ARTIFACT_ID}-${MVN_VERSION}-${GIT_BRANCH}-${GIT_COMMIT_SHORT}"
    }
 
   //Package the application without running tests.
